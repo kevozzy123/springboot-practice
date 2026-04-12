@@ -1,12 +1,12 @@
 package com.pan.myfriendsapp.core.exception;
 
-public class ResourceNotFoundException extends RuntimeException {
+public class ResourceNotFoundException extends AbstractClientException {
 
     public ResourceNotFoundException(String message) {
-        super(message);
+        super(404, "Specified resource doesn't exist: " + message);
     }
 
-    public ResourceNotFoundException(String message, Throwable cause) {
-        super(message, cause);
+    public ResourceNotFoundException() {
+        super(404, "Specified resource doesn't exist.");
     }
 }

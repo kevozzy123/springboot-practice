@@ -14,7 +14,10 @@ public class Feed {
 
     @Id
     @GeneratedValue(generator = "snowflake")
-    @GenericGenerator(name = "snowflake", strategy = "com.example.SnowflakeIdGenerator")
+    @GenericGenerator(
+            name = "snowflake",
+            strategy = "com.pan.myfriendsapp.core.utils.SnowflakeIdGenerator"
+    )
     private Long id;
     private String content;
     private Long userId;

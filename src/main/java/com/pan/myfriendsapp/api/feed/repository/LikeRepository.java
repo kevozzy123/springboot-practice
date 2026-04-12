@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface LikeRepository extends JpaRepository<Like, Long> {
 
-    List<Like> getLikesByFeed(Long postId, int pageNum, int pageSize);
+    List<Like> getLikesByFeedId(Long postId, int pageNum, int pageSize);
 
     boolean existsByFeedIdAndUserId(Long feedId, Long userId);
 }

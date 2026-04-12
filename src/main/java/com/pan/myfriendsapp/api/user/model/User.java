@@ -2,14 +2,20 @@ package com.pan.myfriendsapp.api.user.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
+    private String avatarUrl;
+    private String bio;
+    private LocalDateTime createdAt;
 
     // constructors
     public User() {}

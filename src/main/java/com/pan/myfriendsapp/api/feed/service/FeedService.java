@@ -10,8 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class FeedService {
 
@@ -42,9 +40,9 @@ public class FeedService {
         return mapToDto(feed);
     }
 
-    public List<FeedDto> getFeedsForUser() {
-
-    }
+//    public List<FeedDto> getFeedsForUser() {
+//
+//    }
 
     private FeedDto mapToDto(Feed feed) {
         FeedDto dto = new FeedDto();

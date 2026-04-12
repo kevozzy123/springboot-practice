@@ -2,12 +2,15 @@ package com.pan.myfriendsapp.api.user.controller;
 
 import com.pan.myfriendsapp.api.user.model.User;
 import com.pan.myfriendsapp.api.user.service.UserService;
+import com.pan.myfriendsapp.core.data.ApiResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 // Handles all the requests that begins with "/users" in the url
-@RestController("/users")
+@RestController
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -18,17 +21,19 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user.getName(), user.getEmail());
+    public ApiResponse<User> createUser(@RequestBody User user) {
+        return new ApiResponse(userService.createUser(user.getName(), user.getEmail()));
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public ApiResponse<List<User>> getUsers(
+            @RequestParam(defaultValue = "0") int pageNum,
+            @RequestParam(defaultValue = "10") int pageSize) {
+        return new ApiResponse(userService.getUsers(pageNum, pageSize));
     }
 
     @GetMapping("/{id}")
-    public User getFilteredUserById(@PathVariable String userId) {
-        return userService.getById(userId);
+    public ResponseEntity<User> getFilteredUserById(@PathVariable String userId) {
+        return ResponseEntity.ok(userService.getById(userId));
     }
 }
