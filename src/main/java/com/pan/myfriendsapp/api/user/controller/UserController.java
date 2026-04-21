@@ -37,4 +37,16 @@ public class UserController {
     public ResponseEntity<User> getFilteredUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getById(id));
     }
+
+    // Update user information
+    @PutMapping
+    public User updateUserInfo() {
+        return null;
+    }
+
+    // Delete a user by ID, return only a status
+    @DeleteMapping("/{id}")
+    public Void deleteUserById() {
+        return null;
+    }
 }
