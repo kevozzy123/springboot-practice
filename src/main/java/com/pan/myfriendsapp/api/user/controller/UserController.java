@@ -1,5 +1,6 @@
 package com.pan.myfriendsapp.api.user.controller;
 
+import com.pan.myfriendsapp.api.user.dto.PostUserRequestBody;
 import com.pan.myfriendsapp.api.user.model.User;
 import com.pan.myfriendsapp.api.user.service.UserService;
 import com.pan.myfriendsapp.core.data.ApiResponse;
@@ -21,19 +22,19 @@ public class UserController {
     }
 
     @PostMapping
-    public ApiResponse<User> createUser(@RequestBody User user) {
-        return new ApiResponse(userService.createUser(user.getName(), user.getEmail()));
+    public ApiResponse<User> createUser(@RequestBody PostUserRequestBody user) {
+        return new ApiResponse(userService.createUser(user));
     }
 
     @GetMapping
-    public ApiResponse<List<User>> getUsers(
+    public ApiResponse<List<User>> getUsers( // map the endpoint url to a function/method
             @RequestParam(defaultValue = "0") int pageNum,
             @RequestParam(defaultValue = "10") int pageSize) {
         return new ApiResponse(userService.getUsers(pageNum, pageSize));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getFilteredUserById(@PathVariable String userId) {
-        return ResponseEntity.ok(userService.getById(userId));
+    public ResponseEntity<User> getFilteredUserById(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getById(id));
     }
 }

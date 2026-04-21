@@ -1,5 +1,6 @@
 package com.pan.myfriendsapp.api.user.service;
 
+import com.pan.myfriendsapp.api.user.dto.PostUserRequestBody;
 import com.pan.myfriendsapp.api.user.model.User;
 import com.pan.myfriendsapp.api.user.repository.UserRepository;
 import org.springframework.data.domain.Page;
@@ -18,20 +19,21 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User createUser(String name, String email) {
-        User user = new User(name, email);
+    public User createUser(PostUserRequestBody requestBody) {
+        User user = new User(requestBody.getName(), requestBody.getEmail());
+        user.setBio(requestBody.getBio());
         return userRepository.save(user);
     }
 
     public List<User> getUsers(int pageNum, int pageSize) {
-        pageSize = pageSize == 0 ? 20 : pageSize;
         Pageable pageable = PageRequest.of(pageNum, pageSize);
         Page<User> users = userRepository.findAll(pageable);
 
         return users.getContent();
     }
 
-    public User getById(String id) {
-        return userRepository.findById(id);
+    public User getById(Long id) {
+        return userRepository.findById(id)
+                .orElse(null);
     }
 }

@@ -1,11 +1,9 @@
 package com.pan.myfriendsapp.api.feed.controller;
 
+import com.pan.myfriendsapp.api.feed.dto.GetFeedsResponse;
 import com.pan.myfriendsapp.api.feed.service.FeedService;
 import com.pan.myfriendsapp.api.feed.service.LikeService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 // This feature is similar to Wechat's PengYouQuan
 @RequestMapping("/feeds")
@@ -19,14 +17,13 @@ public class FeedController {
         this.likeService = likeService;
     }
 
-//    @GetMapping
-//    public ResponseEntity<GetFeedsResponse> getFeedsByUserId(@PathVariable Long userId, @RequestParam Integer pageNum, @RequestParam Integer pageSize) {
-//        return feedService.getFeedsByUserId(userId, pageNum, pageSize);
-//    }
+    @GetMapping
+    public GetFeedsResponse getFeedsByUserId(@PathVariable Long userId, @RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+        return feedService.getFeedsByUserId(userId, pageNum, pageSize);
+    }
 
     @PostMapping("/{feedId}/users/{userId}/like")
-    public ResponseEntity<Void> postLikeForFeed(@PathVariable Long feedId, @PathVariable Long userId) {
+    public void postLikeForFeed(@PathVariable Long feedId, @PathVariable Long userId) {
         likeService.likePost(feedId, userId);
-        return ResponseEntity.noContent().build();
     }
 }

@@ -1,11 +1,13 @@
 package com.pan.myfriendsapp.api.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     @Id
@@ -31,4 +33,12 @@ public class User {
 
     public void setName(String name) { this.name = name; }
     public void setEmail(String email) { this.email = email; }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
 }
